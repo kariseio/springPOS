@@ -27,6 +27,21 @@ public class MemberDao {
         return results;
     }
 
+    public Member selectById(String id) {
+        List<Member> results = jdbcTemplate.query("select * from MEMBER where ID = ?",
+                new RowMapper<Member>() {
+                    @Override
+                    public Member mapRow(ResultSet rs, int rowNum)  throws SQLException {
+                        Member member= new Member( rs.getString("ID"),
+                                rs.getString("PASSWORD"),
+                                rs.getString("NAME"),
+                                rs.getString("EMAIL"));
+                        return member;
+                    }
+                }, id);
+        return results.isEmpty() ? null : results.get(0);
+    }
+
     public Member selectByEmail(String email) {
         List<Member> results = jdbcTemplate.query("select * from MEMBER where EMAIL = ?",
                 new RowMapper<Member>() {
@@ -57,5 +72,19 @@ public class MemberDao {
                     }
                 }, keyHolder);
         Number keyValue= keyHolder.getKey();
+    }
+
+    public void update(final Member member) {
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement pstmt = con.prepareStatement("UPDATE MEMBER SET PASSWORD = ?, NAME = ?, EMAIL = ? WHERE ID = ?");
+                pstmt.setString(1, member.getPassword());
+                pstmt.setString(2, member.getName());
+                pstmt.setString(3, member.getEmail());
+                pstmt.setString(4, member.getId());
+                return pstmt;
+            }
+        });
     }
 }

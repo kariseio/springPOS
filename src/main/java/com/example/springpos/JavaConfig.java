@@ -1,5 +1,7 @@
 package com.example.springpos;
 
+import com.example.springpos.dao.MemberDao;
+import com.example.springpos.service.MemberService;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,5 +21,14 @@ public class JavaConfig {
         ds.setMinEvictableIdleTimeMillis(60000 * 3);
         ds.setTimeBetweenEvictionRunsMillis(10 * 1000);
         return ds;
+    }
+
+    @Bean
+    public MemberDao memberDao() {
+        return new MemberDao(dataSource());
+    }
+    @Bean
+    public MemberService memberRegSvc(){
+        return new MemberService(memberDao());
     }
 }
