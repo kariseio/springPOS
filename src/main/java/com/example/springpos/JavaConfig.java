@@ -3,8 +3,10 @@ package com.example.springpos;
 import com.example.springpos.dao.MemberDao;
 import com.example.springpos.dao.ProductDao;
 import com.example.springpos.dao.ReceiveDao;
+import com.example.springpos.dao.SaleDao;
 import com.example.springpos.service.MemberService;
 import com.example.springpos.service.ProductService;
+import com.example.springpos.service.SaleService;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,4 +47,10 @@ public class JavaConfig {
     @Bean
     public ProductService productService() {
         return new ProductService(productDao(), receiveDao());}
+    @Bean
+    public SaleDao saleDao() {
+        return new SaleDao(dataSource());}
+    @Bean
+    public SaleService saleService() {
+        return new SaleService(saleDao());}
 }

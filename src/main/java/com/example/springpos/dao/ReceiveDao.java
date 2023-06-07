@@ -4,11 +4,13 @@ import com.example.springpos.entity.Product;
 import com.example.springpos.entity.Receive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class ReceiveDao {
@@ -17,6 +19,22 @@ public class ReceiveDao {
     @Autowired
     public ReceiveDao(DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public void insert(int p_code, Timestamp date, int quantity) {
+        KeyHolder keyHolder= new GeneratedKeyHolder();
+        jdbcTemplate.update(
+                new PreparedStatementCreator() {
+                    @Override
+                    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                        PreparedStatement pstmt= con.prepareStatement("insert into RECEIVE (P_CODE, RE_DATE, RE_QUANTITY) values (?, ?, ?)",new String[] {"RE_CODE"});
+                        pstmt.setInt(1,  p_code);
+                        pstmt.setTimestamp(2,  date);
+                        pstmt.setInt(3,  quantity);
+                        return pstmt;
+                    }
+                }, keyHolder);
+        Number keyValue= keyHolder.getKey();
     }
 
     public List<Receive> selectAll() {
