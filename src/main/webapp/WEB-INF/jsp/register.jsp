@@ -66,8 +66,8 @@
     <h2>회원가입</h2>
     <form action="/register" method="post">
         <div>
-            <label for="username">사용자명:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="id">아이디:</label>
+            <input type="text" id="id" name="id" required>
         </div>
         <div>
             <label for="password">비밀번호:</label>
@@ -86,7 +86,7 @@
         </div>
     </form>
     <div class="signup">
-        이미 계정이 있으신가요? <a href="login.jsp">로그인</a>
+        이미 계정이 있으신가요? <a href="login">로그인</a>
     </div>
 </div>
 </body>

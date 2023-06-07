@@ -55,7 +55,7 @@
         <p>계정이 성공적으로 삭제되었습니다.</p>
     </div>
     <div class="login-button">
-        <a href="login.jsp"><button>Login</button></a>
+        <a href="login"><button>Login</button></a>
     </div>
 </div>
 </body>

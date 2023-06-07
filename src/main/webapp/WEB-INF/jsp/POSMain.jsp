@@ -91,20 +91,20 @@
         <div class="greeting">
             <span id="memberName"><%= member.getName() %></span>님 안녕하세요.
         </div>
-        <a href="logout.jsp" class="logout">로그아웃</a>
+        <a href="logout" class="logout">로그아웃</a>
         <%-- 로그인 안했을 때 --%>
         <% } else { %>
         <div class="greeting">
             <span>로그인을 해주세요.</span>
         </div>
-        <a href="login.jsp" class="login">로그인</a>
+        <a href="login" class="login">로그인</a>
         <% } %>
     </div>
     <div class="buttons">
-        <div class="button">통계</div>
-        <div class="button">재고 관리</div>
-        <div class="button">판매 정보</div>
-        <div class="button">계정 관리</div>
+        <a href="statistics" class="button">통계</a>
+        <a href="stockManagement" class="button">재고 관리</a>
+        <a href="saleInfo" class="button">판매 정보</a>
+        <a href="accountManagement" class="button">계정 관리</a>
     </div>
 </div>
 <div class="time">

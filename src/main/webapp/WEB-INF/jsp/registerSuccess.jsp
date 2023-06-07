@@ -54,7 +54,7 @@
     <p>회원가입이 성공적으로 완료되었습니다. 환영합니다!</p>
   </div>
   <div class="login-button">
-    <a href="login.jsp"><button>로그인하기</button></a>
+    <a href="login"><button>로그인하기</button></a>
   </div>
 </div>
 </body>

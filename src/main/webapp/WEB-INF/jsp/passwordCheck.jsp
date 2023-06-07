@@ -56,7 +56,7 @@
 <body>
     <div class="container">
         <h2>비밀번호 확인</h2>
-        <form action="passwordChange.jsp" method="post">
+        <form action="passwordChange" method="post">
             <div>
                 <label for="password">현재 비밀번호:</label>
                 <input type="password" id="password" name="password" required>

@@ -55,7 +55,7 @@
 <body>
 <div class="container">
     <h2>새로운 비밀번호 입력</h2>
-    <form action="passwordChangeSuccess.jsp" method="post">
+    <form action="passwordChangeSuccess" method="post">
         <div>
             <label for="newPassword">새로운 비밀번호:</label>
             <input type="password" id="newPassword" name="newPassword" required>
