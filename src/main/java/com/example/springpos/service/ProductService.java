@@ -20,5 +20,7 @@ public class ProductService {
         Product product = new Product(productDao.selectByName(name).getP_code(),name, quantity, price);
 
         productDao.insert(product);
+
+        return product;
     }
 }
