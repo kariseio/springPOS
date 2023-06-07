@@ -2,6 +2,7 @@ package com.example.springpos;
 
 import com.example.springpos.dao.MemberDao;
 import com.example.springpos.dao.ProductDao;
+import com.example.springpos.dao.ReceiveDao;
 import com.example.springpos.service.MemberService;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +13,7 @@ public class JavaConfig {
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
         DataSource ds = new DataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost/springPOS?characterEncoding=utf8&serverTimezone=UTC");
         ds.setUsername("root");
         ds.setPassword("1234");
@@ -36,5 +37,8 @@ public class JavaConfig {
     public ProductDao productDao() {
         return new ProductDao(dataSource());
     }
-
+    @Bean
+    public ReceiveDao receiveDao() {
+        return new ReceiveDao(dataSource());
+    }
 }

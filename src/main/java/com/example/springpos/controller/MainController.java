@@ -66,7 +66,7 @@ public class MainController {
         }
 
         model.addAttribute("Member", member);
-        return "POSMain";
+        return "/";
     }
 
     // 로그아웃
