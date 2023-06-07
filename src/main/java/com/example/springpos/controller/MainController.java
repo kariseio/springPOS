@@ -24,7 +24,10 @@ public class MainController {
 
     // 메인 페이지
     @GetMapping("/")
-    public String index() {
+    public String index(HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+        model.addAttribute("member", member);
+
         return "POSMain";
     }
 
@@ -58,15 +61,14 @@ public class MainController {
     }
 
     @PostMapping("/login")
-    public String login(HttpSession session, Model model, @RequestParam("id") String id, @RequestParam("password") String pw) {
+    public String login(HttpSession session, @RequestParam("id") String id, @RequestParam("password") String pw) {
         Member member = memberService.getMemberById(id);
 
         if(member == null || !member.getPassword().equals(pw)) {
             return "redirect:/login";
         }
 
-        session.setAttribute("Member", member);
-        model.addAttribute("Member", member);
+        session.setAttribute("member", member);
         return "redirect:/";
     }
 
