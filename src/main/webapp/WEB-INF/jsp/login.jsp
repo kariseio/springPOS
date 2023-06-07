@@ -66,8 +66,8 @@
     <h2>로그인</h2>
     <form action="login" method="post">
         <div>
-            <label for="username">사용자명:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="id">아이디:</label>
+            <input type="text" id="id" name="id" required>
         </div>
         <div>
             <label for="password">비밀번호:</label>

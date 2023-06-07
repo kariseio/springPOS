@@ -1,3 +1,4 @@
+<%@ page import="com.example.springpos.entity.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,7 +36,7 @@
             font-weight: bold;
         }
 
-        .logout {
+        .logout, .login {
             text-decoration: none;
             background-color: #4CAF50;
             color: white;
@@ -43,7 +44,7 @@
             border-radius: 4px;
         }
 
-        .logout:hover {
+        .logout:hover, .login:hover {
             background-color: #45a049;
         }
 
@@ -82,10 +83,22 @@
 <div class="container">
     <h1>POS 시스템</h1>
     <div class="header">
+        <%-- 로그인 했을 때 --%>
+        <%
+            Member member = (Member) session.getAttribute("Member"); // 로그인된 회원 정보 가져오기
+            if (member != null) { // 로그인된 회원이 있을 경우
+        %>
         <div class="greeting">
-            <span id="memberName">${Member.name}</span>님 안녕하세요.
+            <span id="memberName"><%= member.getName() %></span>님 안녕하세요.
         </div>
         <a href="logout.jsp" class="logout">로그아웃</a>
+        <%-- 로그인 안했을 때 --%>
+        <% } else { %>
+        <div class="greeting">
+            <span>로그인을 해주세요.</span>
+        </div>
+        <a href="login.jsp" class="login">로그인</a>
+        <% } %>
     </div>
     <div class="buttons">
         <div class="button">통계</div>
