@@ -21,6 +21,7 @@
     </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
     <h2>계정 관리</h2>
     <div class="message">

@@ -49,6 +49,7 @@
     </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
     <h2>계정 삭제 완료</h2>
     <div class="success-message">

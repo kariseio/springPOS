@@ -53,6 +53,7 @@
     </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
     <h2>새로운 비밀번호 입력</h2>
     <form action="passwordChangeSuccess" method="post">

@@ -49,13 +49,14 @@
   </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
   <h2>비밀번호 변경 완료</h2>
   <div class="success-message">
     <p>비밀번호가 성공적으로 변경되었습니다.</p>
   </div>
   <div class="main-button">
-    <a href="POSMain"><button>POS Main</button></a>
+    <a href="/"><button>POS Main</button></a>
   </div>
 </div>
 </body>
