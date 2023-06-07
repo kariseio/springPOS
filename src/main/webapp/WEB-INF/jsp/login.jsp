@@ -78,7 +78,7 @@
         </div>
     </form>
     <div class="signup">
-        계정이 없으신가요? <a href="register.jsp">회원가입</a>
+        계정이 없으신가요? <a href="register">회원가입</a>
     </div>
 </div>
 </body>
