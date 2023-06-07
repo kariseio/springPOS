@@ -86,8 +86,7 @@
     <div class="header">
         <%-- 로그인 했을 때 --%>
         <%
-            Model model = (Model) request.getAttribute("org.springframework.ui.Model"); // Model 객체 가져오기
-            Member member = (Member) model.getAttribute("Member"); // 로그인된 회원 정보 가져오기
+            Member member = (Member)request.getAttribute("Member"); // Model 에서 로그인된 회원 가져오기
             if (member != null) { // 로그인된 회원이 있을 경우
         %>
         <div class="greeting">
