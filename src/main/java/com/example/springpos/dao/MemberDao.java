@@ -58,20 +58,18 @@ public class MemberDao {
     }
 
     public void insert(final Member member) {
-        KeyHolder keyHolder= new GeneratedKeyHolder();
         jdbcTemplate.update(
                 new PreparedStatementCreator() {
                     @Override
                     public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-                        PreparedStatement pstmt= con.prepareStatement("insert into MEMBER (ID, PASSWORD, NAME, EMAIL) values (?, ?, ?, ?)",new String[] {"ID"});
+                        PreparedStatement pstmt= con.prepareStatement("insert into MEMBER (ID, PASSWORD, NAME, EMAIL) values (?, ?, ?, ?)");
                         pstmt.setString(1,  member.getId());
                         pstmt.setString(2,  member.getPassword());
                         pstmt.setString(3,  member.getName());
                         pstmt.setString(4,  member.getEmail());
                         return pstmt;
                     }
-                }, keyHolder);
-        Number keyValue= keyHolder.getKey();
+                });
     }
 
     public void update(final Member member) {
