@@ -65,14 +65,14 @@ public class MainController {
             return "/login";
         }
 
-        model.addAttribute("user", id);
+        model.addAttribute("Member", member);
         return "/";
     }
 
     // 로그아웃
     @PostMapping("/logout")
     public String logout(Model model, HttpSession session) {
-        session.removeAttribute("user");
+        session.removeAttribute("Member");
         return "redirect:/"; // 로그아웃 후 리다이렉트할 경로
     }
 
@@ -88,7 +88,7 @@ public class MainController {
         if(pw == null) {
             return "passwordCheck";
         } else {
-            String id = (String)model.getAttribute("Member");
+            String id = ((Member) model.getAttribute("Member")).getId();
             String password = memberService.getPassword(id);
 
             if(pw == password) {
@@ -103,7 +103,7 @@ public class MainController {
     // 비밀번호 변경 성공
     @PostMapping("/pwChangeSuccess")
     public String pwChangeSuccess(@RequestParam("newPassword") String newPW, Model model) {
-        String id = (String)model.getAttribute("Member");
+        String id = ((Member) model.getAttribute("Member")).getId();
 
         if(newPW != null && id != null) {
             memberService.changePW(id, newPW);
