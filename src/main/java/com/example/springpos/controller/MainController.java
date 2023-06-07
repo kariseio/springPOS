@@ -61,8 +61,8 @@ public class MainController {
     public String login(Model model, @RequestParam("id") String id, @RequestParam("password") String pw) {
         Member member = memberService.getMemberById(id);
 
-        if(member == null) {
-            return "/login";
+        if(member == null || member.getPassword() != pw) {
+            return "redirect:/login";
         }
 
         model.addAttribute("Member", member);
