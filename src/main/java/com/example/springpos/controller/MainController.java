@@ -24,13 +24,13 @@ public class MainController {
 
     // 메인 페이지
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(HttpSession session) {
         return "POSMain";
     }
 
     // 회원가입 페이지
     @GetMapping("/register")
-    public String register(Model model) {
+    public String register() {
         return "register";
     }
 
@@ -47,24 +47,25 @@ public class MainController {
 
     // 회원가입 완료
     @GetMapping("/registerSuccess")
-    public String registerSuccess(Model model) {
+    public String registerSuccess() {
         return "registerSuccess";
     }
 
     // 로그인
     @GetMapping("/login")
-    public String loginGet(Model model) {
+    public String loginGet() {
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(Model model, @RequestParam("id") String id, @RequestParam("password") String pw) {
+    public String login(HttpSession session, Model model, @RequestParam("id") String id, @RequestParam("password") String pw) {
         Member member = memberService.getMemberById(id);
 
         if(member == null || !member.getPassword().equals(pw)) {
             return "redirect:/login";
         }
 
+        session.setAttribute("Member", member);
         model.addAttribute("Member", member);
         return "redirect:/";
     }
@@ -78,7 +79,7 @@ public class MainController {
 
     // 비밀번호 확인
     @GetMapping("/pwCheck")
-    public String pwCheck(Model model) {
+    public String pwCheck() {
         return "passwordCheck";
     }
 
