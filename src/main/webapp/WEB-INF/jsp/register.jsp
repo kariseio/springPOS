@@ -64,7 +64,7 @@
 <body>
 <div class="container">
     <h2>회원가입</h2>
-    <form action="/register" method="post">
+    <form action="registerSuccess" method="post">
         <div>
             <label for="id">아이디:</label>
             <input type="text" id="id" name="id" required>
