@@ -25,7 +25,7 @@
         h1 {
             font-weight: bold;
         }
-        a {
+        .header_a {
             text-decoration: none;
             color: #000000;
         }
@@ -34,7 +34,7 @@
 <body>
 <header>
     <div class="logo">
-        <a href="/"> <h1>POS System</h1> </a>
+        <a href="/" class="header_a"> <h1>POS System</h1> </a>
     </div>
 </header>
 

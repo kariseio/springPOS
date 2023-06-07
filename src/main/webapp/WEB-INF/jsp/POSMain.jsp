@@ -85,8 +85,10 @@
     <div class="header">
         <%-- 로그인 했을 때 --%>
         <%
-            Member member = (Member)request.getAttribute("Member"); // Model 에서 로그인된 회원 가져오기
-            if (request.getAttribute("Member") != null) { // 로그인된 회원이 있을 경우
+            Member member = (Member)session.getAttribute("Member");
+            //Member member = null;
+            if(member != null) {
+
         %>
         <div class="greeting">
             <span id="memberName"> ${Member.name} </span>님 안녕하세요.
