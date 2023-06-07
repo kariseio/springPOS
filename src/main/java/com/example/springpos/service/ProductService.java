@@ -23,4 +23,11 @@ public class ProductService {
 
         return product;
     }
+
+    // 상품 수정
+    public void updateProduct(int code, String name, int quantity, int price) {
+        productDao.update(code, name, quantity, price);
+    }
+
+    //
 }

@@ -3,23 +3,25 @@ package com.example.springpos.controller;
 
 import com.example.springpos.dao.ProductDao;
 import com.example.springpos.dao.ReceiveDao;
+import com.example.springpos.entity.Product;
+import com.example.springpos.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    ProductDao  productDao;
-    ReceiveDao receiveDao;
+    ProductService productService;
 
     @Autowired
-    public ProductController(ProductDao productDao, ReceiveDao receiveDao) {
-        this.productDao = productDao;
-        this.receiveDao = receiveDao;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
+
 
     // 상품 페이지
     @GetMapping("/")
@@ -29,12 +31,20 @@ public class ProductController {
 
     // 상품 추가
     @PostMapping("/add")
-    public String addProduct() {
-        
+    public String addProduct(@RequestParam("name") String name, @RequestParam("quantity") int quantity, @RequestParam("price") int price) {
+        productService.addProduct(name, quantity, price);
 
-        return "/product";
+        return "redirect:/product";
     }
+
     // 상품 수정
+    @PostMapping("/update")
+    public String updateProduct(@RequestParam("code") int code, @RequestParam("name") String name, @RequestParam("quantity") int quantity, @RequestParam("price") int price) {
+        productService.updateProduct(code, name, quantity, price);
+
+        return "redirect:/product";
+    }
+
     // 입고 조회
     // 상품 입고
     // 판매량
