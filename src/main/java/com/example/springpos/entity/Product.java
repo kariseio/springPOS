@@ -12,6 +12,17 @@ public class Product {
         this.p_price = p_price;
     }
 
+    public Product(int p_code, String p_name, int p_quantity, int p_price) {
+        this.p_code = p_code;
+        this.p_name = p_name;
+        this.p_quantity = p_quantity;
+        this.p_price = p_price;
+    }
+
+    public int getP_code() {
+        return p_code;
+    }
+
     public String getP_name() {
         return p_name;
     }

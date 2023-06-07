@@ -14,6 +14,17 @@ public class Receive {
         this.re_quantity = re_quantity;
     }
 
+    public Receive(int re_code, int p_code, Timestamp re_date, int re_quantity) {
+        this.re_code = re_code;
+        this.p_code = p_code;
+        this.re_date = re_date;
+        this.re_quantity = re_quantity;
+    }
+
+    public int getRe_code() {
+        return re_code;
+    }
+
     public int getP_code() {
         return p_code;
     }
