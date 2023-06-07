@@ -16,6 +16,18 @@ public class Sale {
         this.s_price = s_price;
     }
 
+    public Sale(int s_code, String s_pname, Timestamp s_date, int s_quantity, int s_price) {
+        this.s_code = s_code;
+        this.s_pname = s_pname;
+        this.s_date = s_date;
+        this.s_quantity = s_quantity;
+        this.s_price = s_price;
+    }
+
+    public int getS_code() {
+        return s_code;
+    }
+
     public String getS_pname() {
         return s_pname;
     }

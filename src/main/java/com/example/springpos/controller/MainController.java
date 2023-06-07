@@ -24,7 +24,7 @@ public class MainController {
 
     // 메인 페이지
     @GetMapping("/")
-    public String index(HttpSession session) {
+    public String index() {
         return "POSMain";
     }
 
