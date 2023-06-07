@@ -1,4 +1,5 @@
 <%@ page import="com.example.springpos.entity.Member" %>
+<%@ page import="org.springframework.ui.Model" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -85,11 +86,12 @@
     <div class="header">
         <%-- 로그인 했을 때 --%>
         <%
-            Member member = (Member) session.getAttribute("Member"); // 로그인된 회원 정보 가져오기
+            Model model = (Model) request.getAttribute("org.springframework.ui.Model"); // Model 객체 가져오기
+            Member member = (Member) model.getAttribute("Member"); // 로그인된 회원 정보 가져오기
             if (member != null) { // 로그인된 회원이 있을 경우
         %>
         <div class="greeting">
-            <span id="memberName"><%= member.getName() %></span>님 안녕하세요.
+            <span id="memberName"> ${Member.name} </span>님 안녕하세요.
         </div>
         <a href="logout" class="logout">로그아웃</a>
         <%-- 로그인 안했을 때 --%>
