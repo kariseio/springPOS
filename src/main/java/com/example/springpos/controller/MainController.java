@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +32,7 @@ public class MainController {
     // 회원가입 페이지
     @GetMapping("/register")
     public String register() {
-        return "register";
+        return "register/register";
     }
 
     // 회원가입 처리
@@ -39,16 +40,16 @@ public class MainController {
     public String register(Model model, RegisterRequest registerRequest) {
         try {
             memberService.regist(registerRequest);
-            return "registerSuccess";
+            return "register/registerSuccess";
         } catch (Exception ex) {
-            return "register";
+            return "register/register";
         }
     }
 
     // 회원가입 완료
     @GetMapping("/registerSuccess")
     public String registerSuccess() {
-        return "registerSuccess";
+        return "register/registerSuccess";
     }
 
     // 로그인
@@ -71,31 +72,30 @@ public class MainController {
 
     // 로그아웃
     @PostMapping("/logout")
-    public String logout(Model model, HttpSession session) {
-        session.removeAttribute("Member");
-        return "redirect:/"; // 로그아웃 후 리다이렉트할 경로
+    public String logout(Model model) {
+        return "POSMain"; // 로그아웃 후 리다이렉트할 경로
     }
 
     // 비밀번호 확인
     @GetMapping("/pwCheck")
     public String pwCheck() {
-        return "passwordCheck";
+        return "accountManagement/passwordCheck";
     }
 
     // 비밀번호 변경
     @PostMapping("/pwChange")
     public String pwChange(@RequestParam("newPassword") String pw, Model model) {
         if(pw == null) {
-            return "passwordCheck";
+            return "accountManagement/passwordCheck";
         } else {
             String id = ((Member) model.getAttribute("Member")).getId();
             String password = memberService.getPassword(id);
 
             if(pw == password) {
-                return "passwordCheck";
+                return "accountManagement/passwordCheck";
             } else {
                 // 비밀번호 맞으면
-                return "pwChange";
+                return "redirect:/pwChange";
             }
         }
     }
@@ -107,16 +107,16 @@ public class MainController {
 
         if(newPW != null && id != null) {
             memberService.changePW(id, newPW);
-            return "passwordChangeSuccess";
+            return "accountManagement/passwordChangeSuccess";
         } else {
-            return "pwChange";
+            return "redirect:/pwChange";
         }
     }
 
     // 계정삭제
     @GetMapping("/deleteMember")
     public String delete(Model model) {
-        return "deleteMember";
+        return "accountManagement/deleteMember";
     }
 
 

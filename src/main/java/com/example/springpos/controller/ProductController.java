@@ -26,7 +26,7 @@ public class ProductController {
     // 상품 페이지
     @GetMapping("/")
     public String product() {
-        return "/product";
+        return "stockManagement/stockManagement";
     }
 
     // 상품 추가
@@ -56,6 +56,4 @@ public class ProductController {
     public String receiveList() {
         return "";
     }
-
-    // 판매량
 }
