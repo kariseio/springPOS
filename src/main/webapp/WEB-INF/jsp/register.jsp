@@ -62,6 +62,7 @@
     </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
     <h2>회원가입</h2>
     <form action="registerSuccess" method="post">
