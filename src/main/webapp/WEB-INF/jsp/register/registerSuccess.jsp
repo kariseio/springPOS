@@ -48,7 +48,7 @@
   </style>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 <div class="container">
   <h2>회원가입 완료</h2>
   <div class="welcome-message">

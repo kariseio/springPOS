@@ -62,7 +62,7 @@
     </style>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="layout/header.jsp" %>
 <div class="container">
     <h2>로그인</h2>
     <form action="login" method="post">

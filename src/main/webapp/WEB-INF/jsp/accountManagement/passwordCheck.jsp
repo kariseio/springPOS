@@ -54,7 +54,7 @@
     </style>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
     <div class="container">
         <h2>비밀번호 확인</h2>
         <form action="passwordChange" method="post">

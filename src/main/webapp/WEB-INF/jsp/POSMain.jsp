@@ -80,7 +80,7 @@
 </head>
 
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="layout/header.jsp" %>
 <div class="container">
     <div class="header">
         <%-- 로그인 했을 때 --%>
@@ -91,7 +91,7 @@
 
         %>
         <div class="greeting">
-            <span id="memberName"> ${Member.name} </span>님 안녕하세요.
+            <span id="memberName"> ${Member.getName()} </span>님 안녕하세요.
         </div>
         <a href="logout" class="logout">로그아웃</a>
         <%-- 로그인 안했을 때 --%>
