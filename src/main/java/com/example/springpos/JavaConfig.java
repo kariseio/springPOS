@@ -4,6 +4,7 @@ import com.example.springpos.dao.MemberDao;
 import com.example.springpos.dao.ProductDao;
 import com.example.springpos.dao.ReceiveDao;
 import com.example.springpos.service.MemberService;
+import com.example.springpos.service.ProductService;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,7 @@ public class JavaConfig {
         return new MemberDao(dataSource());
     }
     @Bean
-    public MemberService memberRegSvc(){
+    public MemberService memberService(){
         return new MemberService(memberDao());
     }
     @Bean
@@ -41,4 +42,7 @@ public class JavaConfig {
     public ReceiveDao receiveDao() {
         return new ReceiveDao(dataSource());
     }
+    @Bean
+    public ProductService productService() {
+        return new ProductService(productDao(), receiveDao());}
 }

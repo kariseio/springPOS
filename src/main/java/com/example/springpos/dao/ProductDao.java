@@ -40,6 +40,20 @@ public class ProductDao {
         Number keyValue= keyHolder.getKey();
     }
 
+    public void update(int code, String name, int quantity, int price) {
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement pstmt = con.prepareStatement("UPDATE PRODUCT SET P_NAME = ?, P_QUANTITY = ?, P_PRICE = ? WHERE P_CODE = ?");
+                pstmt.setString(1, name);
+                pstmt.setInt(2, quantity);
+                pstmt.setInt(3, price);
+                pstmt.setInt(4, code);
+                return pstmt;
+            }
+        });
+    }
+
     public List<Product> selectAll() {
         List<Product> results = jdbcTemplate.query("select * from PRODUCT",
                 (ResultSet rs, int rowNum) -> {

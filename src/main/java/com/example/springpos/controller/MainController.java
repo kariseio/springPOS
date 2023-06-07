@@ -24,19 +24,19 @@ public class MainController {
 
     // 메인 페이지
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
         return "POSMain";
     }
 
     // 회원가입 페이지
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
         return "register";
     }
 
     // 회원가입 처리
     @PostMapping("/registerSuccess")
-    public String register(RegisterRequest registerRequest) {
+    public String register(Model model, RegisterRequest registerRequest) {
         try {
             memberService.regist(registerRequest);
             return "registerSuccess";
@@ -47,13 +47,13 @@ public class MainController {
 
     // 회원가입 완료
     @GetMapping("/registerSuccess")
-    public String registerSuccess() {
+    public String registerSuccess(Model model) {
         return "registerSuccess";
     }
 
     // 로그인
     @GetMapping("/login")
-    public String loginGet() {
+    public String loginGet(Model model) {
         return "login";
     }
 
@@ -78,7 +78,7 @@ public class MainController {
 
     // 비밀번호 확인
     @GetMapping("/pwCheck")
-    public String pwCheck() {
+    public String pwCheck(Model model) {
         return "passwordCheck";
     }
 
@@ -115,7 +115,7 @@ public class MainController {
 
     // 계정삭제
     @GetMapping("/deleteMember")
-    public String delete() {
+    public String delete(Model model) {
         return "deleteMember";
     }
 
