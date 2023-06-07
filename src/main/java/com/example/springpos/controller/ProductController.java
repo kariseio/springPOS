@@ -45,7 +45,17 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    // 입고 조회
     // 상품 입고
+    @PostMapping("/receive/add")
+    public String addReceive() {
+        return "redirect:/product";
+    }
+
+    // 입고 조회
+    @GetMapping("/receive/list")
+    public String receiveList() {
+        return "";
+    }
+
     // 판매량
 }
