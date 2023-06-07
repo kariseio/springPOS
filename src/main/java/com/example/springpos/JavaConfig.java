@@ -1,6 +1,7 @@
 package com.example.springpos;
 
 import com.example.springpos.dao.MemberDao;
+import com.example.springpos.dao.ProductDao;
 import com.example.springpos.service.MemberService;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
@@ -31,4 +32,9 @@ public class JavaConfig {
     public MemberService memberRegSvc(){
         return new MemberService(memberDao());
     }
+    @Bean
+    public ProductDao productDao() {
+        return new ProductDao(dataSource());
+    }
+
 }

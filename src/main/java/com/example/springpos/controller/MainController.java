@@ -65,8 +65,15 @@ public class MainController {
             return "/login";
         }
 
-        model.addAttribute("Member", id);
+        model.addAttribute("user", id);
         return "/";
+    }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public String logout(Model model, HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/"; // 로그아웃 후 리다이렉트할 경로
     }
 
     // 비밀번호 확인
