@@ -66,7 +66,7 @@
     </div>
 
     <div class="buttons">
-        <a href="addProductDomain" class="button">상품 추가</a>
+        <a href="addProductDomain" class="button">새 상품 추가</a>
         <a href="updateProduct" class="button">상품 수정</a>
         <a href="receiveInquiry" class="button">입고 조회</a>
         <a href="addProduct" class="button">상품 입고</a>
