@@ -59,7 +59,7 @@
         <h3>계정을 관리합니다.</h3>
     </div>
     <div class="buttons">
-        <a href="passwordChange" class="button">비밀번호 변경</a>
+        <a href="passwordCheck" class="button">비밀번호 변경</a>
     </div>
 </div>
 </body>

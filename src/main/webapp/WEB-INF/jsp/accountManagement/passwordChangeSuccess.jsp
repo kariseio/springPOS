@@ -54,9 +54,10 @@
   <h2>비밀번호 변경 완료</h2>
   <div class="success-message">
     <p>비밀번호가 성공적으로 변경되었습니다.</p>
+    <p>변경된 비밀번호로 다시 로그인 해주세요.</p>
   </div>
   <div class="main-button">
-    <a href="/"><button>POS Main</button></a>
+    <a href="login"><button>Login</button></a>
   </div>
 </div>
 </body>
