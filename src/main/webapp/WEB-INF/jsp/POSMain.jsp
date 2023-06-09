@@ -105,7 +105,7 @@
     <div class="buttons">
         <a href="statistics" class="button">통계</a>
         <a href="stockManagement" class="button">재고 관리</a>
-        <a href="saleInfo" class="button">판매 정보</a>
+        <a href="sale" class="button">상품 판매</a>
         <a href="accountManagement" class="button">계정 관리</a>
     </div>
 </div>
