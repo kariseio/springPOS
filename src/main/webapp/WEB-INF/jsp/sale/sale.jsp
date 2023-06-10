@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>상품 판매</title>
@@ -78,13 +79,19 @@
             <label for="s_pname">상품 명 :</label>
             <select id="s_pname" name="s_pname" onchange="fillProductInfo()" required>
                 <option value="" selected>상품 명을 선택하세요</option>
-                <%-- 상품 코드 옵션 생성 --%>
-                <% List<Product> productList = (List<Product>) request.getAttribute("productList"); %>
-                <% for (Product product : productList) { %>
-                <option value="<%= product.getP_name() %>"><%= product.getP_name() %></option>
-                <% } %>
+                <%-- model 에서 상품명 가져오기 --%>
+                <c:forEach var="product" items="${productlist}" varStatus="status">
+                    <option value="${product.p_name}">${product.p_name}</option>
+                </c:forEach>
             </select>
         </div>
+
+        <!--상품 리스트를 script 에서 참조하기 위해-->
+        <c:forEach var="product" items="${productlist}" varStatus="status">
+            <input type="hidden" name="productNames" value="${product.p_name}">
+            <input type="hidden" name="productPrices" value="${product.p_price}">
+            <input type="hidden" name="productQuantities" value="${product.p_quantity}">
+        </c:forEach>
 
         <div class="column">
             <label for="p_quantity">재고 :</label>
@@ -107,11 +114,11 @@
         </div>
 
         <div class="column">
-            <label for="s_price">판매가 :</label>
+            <label for="s_price">판매가 : (최종 결제 금액)</label>
             <input type="text" id="s_price" name="s_price" value="">
         </div>
 
-        <button id="calculateBtn" onclick="calculateTotal()">가격 계산하기</button>
+        <button id="calculateBtn" onclick="calculateTotal()" type="button">가격 계산하기</button>
 
         <button id="paymentBtn" type="submit">결제하기</button>
     </form>
@@ -119,29 +126,51 @@
 
 <script>
     function fillProductInfo() {
-        let select = document.getElementById("p_name");
-        let price = document.getElementById("p_price");
-        let quantity = document.getElementById("p_quantity");
+        let select = document.getElementById("s_pname").value; // 사용자가 고른 상품 명
+        let price = document.getElementById("p_price"); // 상품 가격 -> 설정해야함
+        let quantity = document.getElementById("p_quantity"); // 재고 -> 설정해야함
 
-        // 선택한 상품 명에 맞는 가격 가져오기
-        let selectedProduct = select.options[select.selectedIndex].value;
-        let productList = <%= productList %>;
+        let productNameList = document.getElementsByName("productNames");
+        let productPriceList = document.getElementsByName("productPrices");
+        let productQuantityList = document.getElementsByName("productQuantities");
 
-        for (let i = 0; i < productList.length; i++) {
-            if (productList[i].p_name === selectedProduct) {
-                price.value = productList[i].p_price;
-                quantity.value = productList[i].p_quantity;
-                break;
+        for (let i = 0; i < productNameList.length; i++) {
+            if (productNameList[i].value == select) { // 상품명이 같은지 비교
+                price.value = productPriceList[i].value;
+                quantity.value = productQuantityList[i].value;
+                return;
             }
         }
+        price.value = '상품을 골라주세요.';
+        quantity.value = '상품을 골라주세요.';
     }
 
     function calculateTotal() {
-        let quantity = document.getElementById("s_quantity").value;
-        let price = document.getElementById("p_price").value;
+        let quantityInput = document.getElementById("s_quantity");
+        let priceInput = document.getElementById("p_price");
+        let pQuantityInput = document.getElementById("p_quantity");
+        let totalPriceInput = document.getElementById("s_price");
+
+        let quantity = parseInt(quantityInput.value, 10); // 판매 수량
+        let price = parseFloat(priceInput.value); // 상품 가격
+        let pQuantity = parseInt(pQuantityInput.value, 10); // 재고
+
+        if (isNaN(quantity) || isNaN(price) || isNaN(pQuantity)) {
+            alert("판매수량 : 올바른 숫자 값을 입력해주세요.");
+            totalPriceInput.value = "";
+            return;
+        }
+
+        if (quantity > pQuantity) {
+            alert("재고가 부족합니다!\n수량을 다시 설정해주시거나 추가입고가 필요합니다.");
+            totalPriceInput.value = "";
+            return;
+        }
+
         let totalAmount = quantity * price;
-        document.getElementById("s_price").value = totalAmount;
+        totalPriceInput.value = totalAmount;
     }
+
 
 </script>
 
