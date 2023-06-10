@@ -1,5 +1,6 @@
 package com.example.springpos.service;
 
+import com.example.springpos.controller.ProductController;
 import com.example.springpos.dao.ProductDao;
 import com.example.springpos.dao.ReceiveDao;
 import com.example.springpos.entity.Product;
@@ -36,6 +37,20 @@ public class ProductService {
     // 상품 입고
     public void addProduct(int p_code, Timestamp date, int quantity) {
         receiveDao.insert(p_code, date, quantity);
+    }
+
+    // 코드로 상품 찾기
+    public Product getProductByCode(int p_code) {
+        Product product = productDao.selectByCode(p_code);
+
+        return product;
+    }
+
+    // 상품명으로 상품 찾기
+    public Product getProductByName(String p_name) {
+        Product product = productDao.selectByName(p_name);
+
+        return product;
     }
 
     // 상품 리스트

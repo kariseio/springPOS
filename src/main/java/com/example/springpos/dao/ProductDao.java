@@ -80,4 +80,18 @@ public class ProductDao {
         return results.isEmpty() ? null : results.get(0);
     }
 
+    public Product selectByCode(int code) {
+        List<Product> results = jdbcTemplate.query("select * from PRODUCT where P_CODE = ?",
+                new RowMapper<Product>() {
+                    @Override
+                    public Product mapRow(ResultSet rs, int rowNum)  throws SQLException {
+                        Product product = new Product(rs.getInt("P_CODE"),
+                                rs.getString("P_NAME"),
+                                rs.getInt("P_QUANTITY"),
+                                rs.getInt("P_PRICE"));
+                        return product;
+                    }
+                }, code);
+        return results.isEmpty() ? null : results.get(0);
+    }
 }

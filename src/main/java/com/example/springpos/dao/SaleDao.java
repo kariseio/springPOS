@@ -51,6 +51,22 @@ public class SaleDao {
         return results;
     }
 
+    public Sale selectByCode(int code) {
+        List<Sale> results = jdbcTemplate.query("select * from SALE where S_CODE = ?",
+                new RowMapper<Sale>() {
+                    @Override
+                    public Sale mapRow(ResultSet rs, int rowNum)  throws SQLException {
+                        Sale sale = new Sale(rs.getInt("S_CODE"),
+                                rs.getString("S_PNAME"),
+                                rs.getTimestamp("S_DATE"),
+                                rs.getInt("S_QUANTITY"),
+                                rs.getInt("S_PRICE"));
+                        return sale;
+                    }
+                }, code);
+        return results.isEmpty() ? null : results.get(0);
+    }
+
     public Sale selectByName(String name) {
         List<Sale> results = jdbcTemplate.query("select * from SALE where S_PNAME = ?",
                 new RowMapper<Sale>() {

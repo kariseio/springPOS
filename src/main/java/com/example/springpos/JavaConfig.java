@@ -52,5 +52,5 @@ public class JavaConfig {
         return new SaleDao(dataSource());}
     @Bean
     public SaleService saleService() {
-        return new SaleService(saleDao());}
+        return new SaleService(productDao(), saleDao());}
 }
