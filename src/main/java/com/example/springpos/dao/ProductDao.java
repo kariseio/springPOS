@@ -21,7 +21,7 @@ public class ProductDao {
 
     @Autowired
     public ProductDao(DataSource dataSource) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplate= new JdbcTemplate(dataSource);
     }
 
     public void insert(final Product product) {
