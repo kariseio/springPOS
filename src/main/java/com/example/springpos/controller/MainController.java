@@ -32,7 +32,7 @@ public class MainController {
     // 계정 관리 페이지
     @GetMapping("/aacount")
     public String account() {
-        return "accountManagement";
+        return "accountManagement/aacountManagement";
     }
 
     // 회원가입 페이지
@@ -64,6 +64,7 @@ public class MainController {
         return "login";
     }
 
+    // 로그인 처리
     @PostMapping("/login")
     public String login(Model model, @RequestParam("id") String id, @RequestParam("password") String pw) {
         Member member = memberService.getMemberById(id);
@@ -79,17 +80,24 @@ public class MainController {
     // 로그아웃
     @PostMapping("/logout")
     public String logout(Model model) {
-        return "POSMain"; // 로그아웃 후 리다이렉트할 경로
+        return "redirect:/"; // 로그아웃 후 리다이렉트할 경로
     }
 
     // 비밀번호 확인
-    @GetMapping("/pwCheck")
+    @GetMapping("/passwordCheck")
     public String pwCheck() {
         return "accountManagement/passwordCheck";
     }
 
+    // 비밀번호 변경 Get
+    @GetMapping("/passwordChange")
+    public String pwChangeGet() {
+
+        return "accountManagement/passwordChange";
+    }
+
     // 비밀번호 변경
-    @PostMapping("/pwChange")
+    @PostMapping("/passwordChange")
     public String pwChange(@RequestParam("newPassword") String pw, Model model) {
         if(pw == null) {
             return "accountManagement/passwordCheck";
@@ -101,13 +109,13 @@ public class MainController {
                 return "accountManagement/passwordCheck";
             } else {
                 // 비밀번호 맞으면
-                return "redirect:/pwChange";
+                return "redirect:/passwordChange";
             }
         }
     }
 
     // 비밀번호 변경 성공
-    @PostMapping("/pwChangeSuccess")
+    @PostMapping("/passwordChangeSuccess")
     public String pwChangeSuccess(@RequestParam("newPassword") String newPW, Model model) {
         String id = ((Member) model.getAttribute("Member")).getId();
 
@@ -115,7 +123,7 @@ public class MainController {
             memberService.changePW(id, newPW);
             return "accountManagement/passwordChangeSuccess";
         } else {
-            return "redirect:/pwChange";
+            return "redirect:/passwordChange";
         }
     }
 
