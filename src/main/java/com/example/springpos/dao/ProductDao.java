@@ -57,7 +57,7 @@ public class ProductDao {
     public List<Product> selectAll() {
         List<Product> results = jdbcTemplate.query("select * from PRODUCT",
                 (ResultSet rs, int rowNum) -> {
-                    Product product= new Product(rs.getString("P_NAME"),
+                    Product product= new Product(rs.getInt("P_CODE"), rs.getString("P_NAME"),
                             rs.getInt("P_QUANTITY"), rs.getInt("P_PRICE"));
 
                     return product;
