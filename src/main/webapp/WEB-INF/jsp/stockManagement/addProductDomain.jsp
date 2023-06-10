@@ -65,7 +65,7 @@
 <%@ include file="../layout/header.jsp" %>
 <div class="container">
     <h2>새 상품 추가</h2>
-    <form action="#" method="post">
+    <form action="addProductDomain" method="post">
         <div>
             <label for="p_name">상품 이름:</label>
             <input type="text" id="p_name" name="p_name" required>
@@ -79,13 +79,23 @@
             <input type="text" id="p_price" name="p_price" required>
         </div>
         <div>
-            <button type="submit">상품 추가</button>
+            <button id="addBtn" type="submit" onclick="showProductInfo()">상품 추가</button>
         </div>
     </form>
     <div class="back">
         <a href="stockManagement">뒤로가기</a>
     </div>
 </div>
+<script>
+    function showProductInfo() {
+        let price = document.getElementById("p_price").value;
+        let name = document.getElementById("p_name").value;
+        let quantity = document.getElementById("p_quantity").value;
+
+        let productInfo = "새로운 상품 추가가 완료되었습니다.\n상품 명: " + name + "\n가격: " + price + "\n수량: " + quantity;
+        alert(productInfo);
+    }
+</script>
 </body>
 </html>
 
