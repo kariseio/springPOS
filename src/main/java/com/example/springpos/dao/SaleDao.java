@@ -18,7 +18,7 @@ public class SaleDao {
 
     @Autowired
     public SaleDao(DataSource dataSource) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplate= new JdbcTemplate(dataSource);
     }
 
     // 판매 추가

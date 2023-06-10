@@ -18,7 +18,7 @@ public class ReceiveDao {
 
     @Autowired
     public ReceiveDao(DataSource dataSource) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplate= new JdbcTemplate(dataSource);
     }
 
     public void insert(int p_code, Timestamp date, int quantity) {
