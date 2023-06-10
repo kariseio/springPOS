@@ -25,8 +25,8 @@ public class ProductController {
     }
 
 
-    // 상품 페이지
-    @GetMapping("/addProductDomain")
+    // 상품 재고 관리 페이지
+    @GetMapping("/stockManagement")
     public String product(Model model) {
         return "stockManagement/stockManagement";
     }
