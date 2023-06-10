@@ -67,10 +67,6 @@
     <h2>새 상품 추가</h2>
     <form action="#" method="post">
         <div>
-            <label for="p_code">상품 코드:</label>
-            <input type="text" id="p_code" name="p_code" required>
-        </div>
-        <div>
             <label for="p_name">상품 이름:</label>
             <input type="text" id="p_name" name="p_name" required>
         </div>
@@ -83,7 +79,7 @@
             <input type="text" id="p_price" name="p_price" required>
         </div>
         <div>
-            <button type="submit">입고</button>
+            <button type="submit">상품 추가</button>
         </div>
     </form>
     <div class="back">

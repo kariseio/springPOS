@@ -71,10 +71,6 @@
     <h2>상품 입고</h2>
     <form action="addProduct" method="post">
         <div>
-            <label for="re_code">입고 코드:</label>
-            <input type="text" id="re_code" name="re_code" required>
-        </div>
-        <div>
             <label for="p_code">상품 코드:</label>
             <select id="p_code" name="p_code" required>
                 <option value="" selected>상품 코드를 선택하세요</option>
