@@ -105,10 +105,9 @@ public class MainController {
             String id = ((Member) model.getAttribute("Member")).getId();
             String password = memberService.getPassword(id);
 
-            if(pw.equals(password)) {
+            if(!pw.equals(password)) {
                 return "accountManagement/passwordCheck";
             } else {
-                // 비밀번호 맞으면
                 return "redirect:/passwordChange";
             }
         }
