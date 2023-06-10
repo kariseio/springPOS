@@ -98,14 +98,14 @@ public class MainController {
 
     // 비밀번호 변경
     @PostMapping("/passwordChange")
-    public String pwChange(@RequestParam("newPassword") String pw, Model model) {
+    public String pwChange(@RequestParam("password") String pw, Model model) {
         if(pw == null) {
             return "accountManagement/passwordCheck";
         } else {
             String id = ((Member) model.getAttribute("Member")).getId();
             String password = memberService.getPassword(id);
 
-            if(pw == password) {
+            if(pw.equals(password)) {
                 return "accountManagement/passwordCheck";
             } else {
                 // 비밀번호 맞으면
