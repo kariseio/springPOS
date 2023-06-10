@@ -24,16 +24,16 @@ public class ProductDao {
         this.jdbcTemplate= new JdbcTemplate(dataSource);
     }
 
-    public void insert(final Product product) {
+    public void insert(String name, int quantity, int price) {
         KeyHolder keyHolder= new GeneratedKeyHolder();
         jdbcTemplate.update(
                 new PreparedStatementCreator() {
                     @Override
                     public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                         PreparedStatement pstmt= con.prepareStatement("insert into PRODUCT (P_NAME, P_QUANTITY, P_PRICE) values (?, ?, ?)",new String[] {"P_CODE"});
-                        pstmt.setString(1,  product.getP_name());
-                        pstmt.setInt(2,  product.getP_quantity());
-                        pstmt.setInt(3,  product.getP_price());
+                        pstmt.setString(1,  name);
+                        pstmt.setInt(2,  quantity);
+                        pstmt.setInt(3,  price);
                         return pstmt;
                     }
                 }, keyHolder);

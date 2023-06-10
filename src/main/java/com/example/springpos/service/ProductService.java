@@ -21,12 +21,9 @@ public class ProductService {
     }
 
     // 상품 추가
-    public Product addProductDomain(String name, int quantity, int price) {
-        Product product = new Product(productDao.selectByName(name).getP_code(),name, quantity, price);
+    public void addProductDomain(String name, int quantity, int price) {
+        productDao.insert(name, quantity, price);
 
-        productDao.insert(product);
-
-        return product;
     }
 
     // 상품 수정
