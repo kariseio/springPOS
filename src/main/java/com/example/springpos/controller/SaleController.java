@@ -34,10 +34,8 @@ public class SaleController {
 
     // 판매 처리
     @PostMapping("/sale")
-    public String sale(@RequestParam("p_name") String name, @RequestParam("s_date") Timestamp date, @RequestParam("s_quantity") int quantity) {
-        Product product = productService.getProductByName(name);
-
-        saleService.addSale(name, date, quantity);
+    public String sale(@RequestParam("s_pname") String name, @RequestParam("s_date") Timestamp date, @RequestParam("s_quantity") int quantity, @RequestParam("s_price") int price) {
+        saleService.addSale(name, date, quantity, price);
 
         return "redirect:/";
     }

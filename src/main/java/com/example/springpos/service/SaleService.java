@@ -19,10 +19,8 @@ public class SaleService {
     }
 
     // 판매 추가
-    public void addSale(String name, Timestamp date, int quantity) {
-        Product product = productDao.selectByName(name);
-
-        saleDao.insert(name, date, quantity, product.getP_price());
+    public void addSale(String name, Timestamp date, int quantity, int price) {
+        saleDao.insert(name, date, quantity, price);
     }
 
     public Sale getSaleByCode(int code) {

@@ -21,6 +21,7 @@ public class SaleDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    // 판매 추가
     public void insert(String pname, Timestamp date, int quantity, int price) {
         KeyHolder keyHolder= new GeneratedKeyHolder();
         jdbcTemplate.update(
@@ -38,6 +39,7 @@ public class SaleDao {
         Number keyValue= keyHolder.getKey();
     }
 
+    // 판매 전체 리스트
     public List<Sale> selectAll() {
         List<Sale> results = jdbcTemplate.query("select * from SALE",
                 (ResultSet rs, int rowNum) -> {
@@ -51,6 +53,7 @@ public class SaleDao {
         return results;
     }
 
+    // 코드로 판매 찾기
     public Sale selectByCode(int code) {
         List<Sale> results = jdbcTemplate.query("select * from SALE where S_CODE = ?",
                 new RowMapper<Sale>() {
@@ -67,6 +70,7 @@ public class SaleDao {
         return results.isEmpty() ? null : results.get(0);
     }
 
+    // 상품명으로 판매 찾기
     public Sale selectByName(String name) {
         List<Sale> results = jdbcTemplate.query("select * from SALE where S_PNAME = ?",
                 new RowMapper<Sale>() {
