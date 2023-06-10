@@ -1,5 +1,4 @@
-<%@ page import="com.example.springpos.entity.Product" %>
-<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -72,12 +71,10 @@
             <label for="p_code">상품 코드:</label>
             <select id="p_code" name="p_code" required>
                 <option value="" selected>상품 코드를 선택하세요</option>
-                <% List<Product> productList = (List<Product>) request.getAttribute("productList");
-                    if (productList != null) {
-                        for (Product product : productList) { %>
-                            <option value="<%= product.getP_code() %>"><%= product.getP_code() %></option>
-                        <% }
-                    } %>
+                <%-- 상품 코드 가져오기 --%>
+                <c:forEach var="product" items="${productlist}" varStatus="status">
+                    <option value="${product.p_code}">${product.p_code}</option>
+                </c:forEach>
             </select>
         </div>
         <div>
