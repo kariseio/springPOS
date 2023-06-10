@@ -30,9 +30,9 @@ public class MainController {
     }
 
     // 계정 관리 페이지
-    @GetMapping("/aacount")
+    @GetMapping("/account")
     public String account() {
-        return "accountManagement/aacountManagement";
+        return "accountManagement/accountManagement";
     }
 
     // 회원가입 페이지
