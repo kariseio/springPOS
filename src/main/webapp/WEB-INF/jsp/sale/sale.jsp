@@ -46,12 +46,6 @@
             border-radius: 4px;
         }
 
-        #totalAmount {
-            font-weight: bold;
-            text-align: center;
-            margin-top: 30px;
-        }
-
         #calculateBtn,
         #paymentBtn {
             display: block;
@@ -81,8 +75,8 @@
 
     <form action="sale" method="post">
         <div class="column">
-            <label for="p_name">상품 명 :</label>
-            <select id="p_name" name="p_name" onchange="fillProductInfo()" required>
+            <label for="s_pname">상품 명 :</label>
+            <select id="s_pname" name="s_pname" onchange="fillProductInfo()" required>
                 <option value="" selected>상품 명을 선택하세요</option>
                 <%-- 상품 코드 옵션 생성 --%>
                 <% List<Product> productList = (List<Product>) request.getAttribute("productList"); %>
@@ -93,13 +87,18 @@
         </div>
 
         <div class="column">
+            <label for="p_quantity">재고 :</label>
+            <input type="text" id="p_quantity" name="p_quantity" readonly>
+        </div>
+
+        <div class="column">
             <label for="p_price">상품 가격 :</label>
             <input type="text" id="p_price" name="p_price" readonly>
         </div>
 
         <div class="column">
-            <label for="p_quantity">수량 :</label>
-            <input type="text" id="p_quantity" name="p_quantity" required>
+            <label for="s_quantity">판매 수량 :</label>
+            <input type="text" id="s_quantity" name="s_quantity" required>
         </div>
 
         <div class="column">
@@ -107,7 +106,10 @@
             <input type="text" id="s_date" name="s_date" value="<%LocalDate now = LocalDate.now(); out.print(now);%>" readonly>
         </div>
 
-        <div id="totalAmount"></div>
+        <div class="column">
+            <label for="s_price">판매가 :</label>
+            <input type="text" id="s_price" name="s_price" value="">
+        </div>
 
         <button id="calculateBtn" onclick="calculateTotal()">가격 계산하기</button>
 
@@ -119,6 +121,7 @@
     function fillProductInfo() {
         let select = document.getElementById("p_name");
         let price = document.getElementById("p_price");
+        let quantity = document.getElementById("p_quantity");
 
         // 선택한 상품 명에 맞는 가격 가져오기
         let selectedProduct = select.options[select.selectedIndex].value;
@@ -127,16 +130,17 @@
         for (let i = 0; i < productList.length; i++) {
             if (productList[i].p_name === selectedProduct) {
                 price.value = productList[i].p_price;
+                quantity.value = productList[i].p_quantity;
                 break;
             }
         }
     }
 
     function calculateTotal() {
-        let quantity = document.getElementById("p_quantity").value;
+        let quantity = document.getElementById("s_quantity").value;
         let price = document.getElementById("p_price").value;
         let totalAmount = quantity * price;
-        document.getElementById("totalAmount").innerText = '총액 : ' + totalAmount + ' 원';
+        document.getElementById("s_price").value = totalAmount;
     }
 
 </script>
