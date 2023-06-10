@@ -69,7 +69,7 @@
     <form action="updateProduct" method="post">
         <div>
             <label for="p_code">상품 코드:</label>
-            <select id="p_code" name="p_code" required>
+            <select id="p_code" name="p_code" required onchange="fillProductInfo()">
                 <option value="" selected>상품 코드를 선택하세요</option>
                 <%-- 상품 코드 가져오기 --%>
                 <c:forEach var="product" items="${productlist}" varStatus="status">
@@ -77,6 +77,13 @@
                 </c:forEach>
             </select>
         </div>
+        <!--상품 리스트를 script 에서 참조하기 위해-->
+        <c:forEach var="product" items="${productlist}" varStatus="status">
+            <input type="hidden" name="productCodes" value="${product.p_code}">
+            <input type="hidden" name="productNames" value="${product.p_name}">
+            <input type="hidden" name="productPrices" value="${product.p_price}">
+            <input type="hidden" name="productQuantities" value="${product.p_quantity}">
+        </c:forEach>
         <div>
             <label for="p_name">상품 이름:</label>
             <input type="text" id="p_name" name="p_name" required>
@@ -97,6 +104,31 @@
         <a href="stockManagement">뒤로가기</a>
     </div>
 </div>
+<script>
+    function fillProductInfo() {
+        let select = document.getElementById("p_code").value; // 사용자가 고른 상품 코드
+        let name = document.getElementById("p_name"); // 상품 명
+        let price = document.getElementById("p_price"); // 상품 가격
+        let quantity = document.getElementById("p_quantity"); // 재고
+
+        let productNameList = document.getElementsByName("productNames");
+        let productPriceList = document.getElementsByName("productPrices");
+        let productQuantityList = document.getElementsByName("productQuantities");
+        let productCodeList = document.getElementsByName("productCodes");
+
+        for (let i = 0; i < productCodeList.length; i++) {
+            if (productCodeList[i].value == select) { // 상품코드 비교
+                name.value = productNameList[i].value;
+                price.value = productPriceList[i].value;
+                quantity.value = productQuantityList[i].value;
+                return;
+            }
+        }
+        name.value = '상품을 골라주세요.'
+        price.value = '상품을 골라주세요.';
+        quantity.value = '상품을 골라주세요.';
+    }
+</script>
 </body>
 </html>
 
