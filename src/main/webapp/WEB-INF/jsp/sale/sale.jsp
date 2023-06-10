@@ -1,5 +1,6 @@
 <%@ page import="com.example.springpos.entity.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -80,30 +81,30 @@
 
     <form action="sale" method="post">
         <div class="column">
-            <label for="p_code">상품 코드 :</label>
-            <select id="p_code" name="p_code" onchange="fillProductInfo()" required>
-                <option value="" selected>상품 코드를 선택하세요</option>
+            <label for="p_name">상품 명 :</label>
+            <select id="p_name" name="p_name" onchange="fillProductInfo()" required>
+                <option value="" selected>상품 명을 선택하세요</option>
                 <%-- 상품 코드 옵션 생성 --%>
                 <% List<Product> productList = (List<Product>) request.getAttribute("productList"); %>
                 <% for (Product product : productList) { %>
-                <option value="<%= product.getP_code() %>"><%= product.getP_code() %></option>
+                <option value="<%= product.getP_name() %>"><%= product.getP_name() %></option>
                 <% } %>
             </select>
         </div>
 
         <div class="column">
-            <label for="p_name">상품 명 :</label>
-            <input type="text" id="p_name" name="p_name" readonly>
-        </div>
-
-        <div class="column">
-            <label for="p_price">가격 :</label>
+            <label for="p_price">상품 가격 :</label>
             <input type="text" id="p_price" name="p_price" readonly>
         </div>
 
         <div class="column">
             <label for="p_quantity">수량 :</label>
             <input type="text" id="p_quantity" name="p_quantity" required>
+        </div>
+
+        <div class="column">
+            <label for="s_date">판매일 :</label>
+            <input type="text" id="s_date" name="s_date" value="<%LocalDate now = LocalDate.now(); out.print(now);%>" readonly>
         </div>
 
         <div id="totalAmount"></div>
@@ -116,17 +117,15 @@
 
 <script>
     function fillProductInfo() {
-        let select = document.getElementById("p_code");
-        let productName = document.getElementById("p_name");
+        let select = document.getElementById("p_name");
         let price = document.getElementById("p_price");
 
-        // 선택한 상품 코드에 맞는 상품명과 가격 가져오기
+        // 선택한 상품 명에 맞는 가격 가져오기
         let selectedProduct = select.options[select.selectedIndex].value;
         let productList = <%= productList %>;
 
         for (let i = 0; i < productList.length; i++) {
-            if (productList[i].code === selectedProduct) {
-                productName.value = productList[i].p_name;
+            if (productList[i].p_name === selectedProduct) {
                 price.value = productList[i].p_price;
                 break;
             }
@@ -137,7 +136,7 @@
         let quantity = document.getElementById("p_quantity").value;
         let price = document.getElementById("p_price").value;
         let totalAmount = quantity * price;
-        document.getElementById("totalAmount").innerText = '총액 : ' + totalAmount + '원';
+        document.getElementById("totalAmount").innerText = '총액 : ' + totalAmount + ' 원';
     }
 
 </script>
