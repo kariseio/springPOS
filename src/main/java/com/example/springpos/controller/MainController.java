@@ -29,6 +29,12 @@ public class MainController {
         return "POSMain";
     }
 
+    // 계정 관리 페이지
+    @GetMapping("/aacount")
+    public String account() {
+        return "accountManagement";
+    }
+
     // 회원가입 페이지
     @GetMapping("/register")
     public String register() {

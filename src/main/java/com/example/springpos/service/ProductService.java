@@ -20,7 +20,7 @@ public class ProductService {
     }
 
     // 상품 추가
-    public Product addProduct(String name, int quantity, int price) {
+    public Product addProductDomain(String name, int quantity, int price) {
         Product product = new Product(productDao.selectByName(name).getP_code(),name, quantity, price);
 
         productDao.insert(product);
@@ -29,12 +29,12 @@ public class ProductService {
     }
 
     // 상품 수정
-    public void updateProduct(int code, String name, int quantity, int price) {
+    public void updateProductDomain(int code, String name, int quantity, int price) {
         productDao.update(code, name, quantity, price);
     }
 
     // 상품 입고
-    public void addReceive(int p_code, Timestamp date, int quantity) {
+    public void addProduct(int p_code, Timestamp date, int quantity) {
         receiveDao.insert(p_code, date, quantity);
     }
 
