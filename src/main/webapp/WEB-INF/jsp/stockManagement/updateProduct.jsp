@@ -97,7 +97,7 @@
             <input type="text" id="p_price" name="p_price" required>
         </div>
         <div>
-            <button type="submit">업데이트</button>
+            <button type="submit" onclick="update()">업데이트</button>
         </div>
     </form>
     <div class="back">
@@ -127,6 +127,15 @@
         name.value = '상품을 골라주세요.'
         price.value = '상품을 골라주세요.';
         quantity.value = '상품을 골라주세요.';
+    }
+
+    function update() {
+        let price = document.getElementById("p_price").value;
+        let name = document.getElementById("p_name").value;
+        let quantity = document.getElementById("p_quantity").value;
+
+        let productInfo = "상품 수정이 완료되었습니다.\n상품 명: " + name + "\n가격: " + price + "\n수량: " + quantity;
+        alert(productInfo);
     }
 </script>
 </body>
