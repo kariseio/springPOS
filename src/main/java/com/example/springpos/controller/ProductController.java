@@ -81,7 +81,7 @@ public class ProductController {
     // 입고 조회
     @GetMapping("/receiveInquiry")
     public String receiveList(Model model) {
-        model.addAttribute("receivelist", productService.receiveList());
+        model.addAttribute("receiveList", productService.receiveList());
 
         return "stockManagement/receiveInquiry";
     }

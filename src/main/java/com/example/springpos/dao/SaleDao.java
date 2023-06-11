@@ -86,4 +86,82 @@ public class SaleDao {
                 }, name);
         return results.isEmpty() ? null : results.get(0);
     }
+
+    // 최다 판매 제품
+    public String getBestSeller() {
+        List<String> results = jdbcTemplate.query("SELECT t1.s_pname, MAX(t1.cumulative_quantity) AS max_cumulative_quantity FROM ( SELECT s_pname, s_quantity, (SELECT SUM(s_quantity) FROM springPOS.SALE t2 WHERE t2.s_pname = t1.s_pname AND t2.s_code <= t1.s_code) AS cumulative_quantity FROM springPOS.SALE t1) t1 GROUP BY t1.s_pname;",
+                (ResultSet rs, int rowNum) -> {
+                    return rs.getString("t1.s_pname");
+                });
+        return results.get(0);
+    }
+
+    // 일일 판매량 검색
+    public List<Sale> selectByDay() {
+        List<Sale> results = jdbcTemplate.query("select * from SALE where DATE(S_DATE) = DATE(now())",
+                (ResultSet rs, int rowNum) -> {
+                    Sale sale= new Sale(rs.getInt("S_CODE"),
+                            rs.getString("S_PNAME"),
+                            rs.getTimestamp("S_DATE"),
+                            rs.getInt("S_QUANTITY"),
+                            rs.getInt("S_PRICE"));
+                    return sale;
+                });
+        return results;
+    }
+
+    // 일일 최다 판매 제품
+    public String getBestSellerByDay() {
+        List<String> results = jdbcTemplate.query("SELECT t1.s_pname, MAX(t1.cumulative_quantity) AS max_cumulative_quantity FROM ( SELECT s_pname, s_quantity, (SELECT SUM(s_quantity) FROM springPOS.SALE t2 WHERE t2.s_pname = t1.s_pname AND t2.s_code <= t1.s_code) AS cumulative_quantity FROM springPOS.SALE t1 where DATE(S_DATE) = DATE(now()) ) t1 GROUP BY t1.s_pname;",
+                (ResultSet rs, int rowNum) -> {
+                    return rs.getString("t1.s_pname");
+                });
+        return results.get(0);
+    }
+
+    // 일주일 판매량 검색
+    public List<Sale> selectByWeek() {
+        List<Sale> results = jdbcTemplate.query("select * from SALE where DATE(S_DATE) >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+                (ResultSet rs, int rowNum) -> {
+                    Sale sale= new Sale(rs.getInt("S_CODE"),
+                            rs.getString("S_PNAME"),
+                            rs.getTimestamp("S_DATE"),
+                            rs.getInt("S_QUANTITY"),
+                            rs.getInt("S_PRICE"));
+                    return sale;
+                });
+        return results;
+    }
+
+    // 일주일 최다 판매 제품
+    public String getBestSellerByWeek() {
+        List<String> results = jdbcTemplate.query("SELECT t1.s_pname, MAX(t1.cumulative_quantity) AS max_cumulative_quantity FROM ( SELECT s_pname, s_quantity, (SELECT SUM(s_quantity) FROM springPOS.SALE t2 WHERE t2.s_pname = t1.s_pname AND t2.s_code <= t1.s_code) AS cumulative_quantity FROM springPOS.SALE t1 where DATE(S_DATE) >= DATE_SUB(NOW(), INTERVAL 7 DAY) ) t1 GROUP BY t1.s_pname;",
+                (ResultSet rs, int rowNum) -> {
+                    return rs.getString("t1.s_pname");
+                });
+        return results.get(0);
+    }
+
+    // 한달 판매량 검색
+    public List<Sale> selectByMonth() {
+        List<Sale> results = jdbcTemplate.query("select * from SALE where DATE(S_DATE) >= DATE_SUB(NOW(), INTERVAL 1 MONTH)",
+                (ResultSet rs, int rowNum) -> {
+                    Sale sale= new Sale(rs.getInt("S_CODE"),
+                            rs.getString("S_PNAME"),
+                            rs.getTimestamp("S_DATE"),
+                            rs.getInt("S_QUANTITY"),
+                            rs.getInt("S_PRICE"));
+                    return sale;
+                });
+        return results;
+    }
+
+    // 한달 최다 판매 제품
+    public String getBestSellerByMonth() {
+        List<String> results = jdbcTemplate.query("SELECT t1.s_pname, MAX(t1.cumulative_quantity) AS max_cumulative_quantity FROM ( SELECT s_pname, s_quantity, (SELECT SUM(s_quantity) FROM springPOS.SALE t2 WHERE t2.s_pname = t1.s_pname AND t2.s_code <= t1.s_code) AS cumulative_quantity FROM springPOS.SALE t1 where DATE(S_DATE) >= DATE_SUB(NOW(), INTERVAL 1 MONTH) ) t1 GROUP BY t1.s_pname;",
+                (ResultSet rs, int rowNum) -> {
+                    return rs.getString("t1.s_pname");
+                });
+        return results.get(0);
+    }
 }
