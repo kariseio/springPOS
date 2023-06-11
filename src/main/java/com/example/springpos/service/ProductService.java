@@ -33,7 +33,9 @@ public class ProductService {
 
     // 상품 입고
     public void addProduct(int p_code, Timestamp date, int quantity) {
+        Product product = getProductByCode(p_code);
         receiveDao.insert(p_code, date, quantity);
+        updateProductDomain(p_code, product.getP_name(), product.getP_quantity() + quantity, product.getP_price());
     }
 
     // 코드로 상품 찾기
