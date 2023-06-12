@@ -43,7 +43,7 @@ public class MainController {
 
     // 회원가입 처리
     @PostMapping("/registerSuccess")
-    public String register(Model model, RegisterRequest registerRequest) {
+    public String register(RegisterRequest registerRequest) {
         try {
             memberService.regist(registerRequest);
             return "register/registerSuccess";
@@ -66,26 +66,31 @@ public class MainController {
 
     // 로그인 처리
     @PostMapping("/login")
-    public String login(Model model, @RequestParam("id") String id, @RequestParam("password") String pw) {
+    public String login(HttpSession session, @RequestParam("id") String id, @RequestParam("password") String pw) {
         Member member = memberService.getMemberById(id);
 
         if(member == null || !member.getPassword().equals(pw)) {
             return "redirect:/login";
         }
 
-        model.addAttribute("Member", member);
+        session.setAttribute("Member", member);
+
         return "POSMain";
     }
 
     // 로그아웃
     @PostMapping("/logout")
-    public String logout(Model model) {
+    public String logout(HttpSession session) {
+        session.invalidate();
         return "redirect:/"; // 로그아웃 후 리다이렉트할 경로
     }
 
     // 비밀번호 확인
     @GetMapping("/passwordCheck")
-    public String pwCheck() {
+    public String pwCheck(HttpSession session) {
+        if(session.getAttribute("Member") == null) {
+            return "redirect:/";
+        }
         return "accountManagement/passwordCheck";
     }
 
@@ -98,11 +103,11 @@ public class MainController {
 
     // 비밀번호 변경
     @PostMapping("/passwordChange")
-    public String pwChange(@RequestParam("password") String pw, Model model) {
+    public String pwChange(@RequestParam("password") String pw, HttpSession session) {
         if(pw == null) {
             return "accountManagement/passwordCheck";
         } else {
-            String id = ((Member) model.getAttribute("Member")).getId();
+            String id = ((Member) session.getAttribute("Member")).getId();
             String password = memberService.getPassword(id);
 
             if(!pw.equals(password)) {
@@ -115,8 +120,8 @@ public class MainController {
 
     // 비밀번호 변경 성공
     @PostMapping("/passwordChangeSuccess")
-    public String pwChangeSuccess(@RequestParam("newPassword") String newPW, Model model) {
-        String id = ((Member) model.getAttribute("Member")).getId();
+    public String pwChangeSuccess(@RequestParam("newPassword") String newPW, HttpSession session) {
+        String id = ((Member) session.getAttribute("Member")).getId();
 
         if(newPW != null && id != null) {
             memberService.changePW(id, newPW);
