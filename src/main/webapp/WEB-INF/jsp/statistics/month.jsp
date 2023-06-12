@@ -19,11 +19,6 @@
             padding: 20px;
         }
 
-        h3 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -40,9 +35,18 @@
             background-color: #f2f2f2;
         }
 
-        h4 {
+        h3 {
             font-weight: bold;
-            margin-bottom: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .back {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .back a {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -70,18 +74,22 @@
         </c:forEach>
         </tbody>
     </table>
-    <h4>최다 판매 제품: ${bestSeller}</h4>
-    <h4 id="monthSaleProfit"></h4>
+    <h3>최다 판매 제품: ${bestSeller}</h3>
+    <h3 id="monthSaleProfit"></h3>
+    <div class="back">
+        <a href="statistics">뒤로가기</a>
+    </div>
 </div>
+
 <script>
     let monthSaleProfit = document.getElementById("monthSaleProfit");
     let prices = document.getElementsByName("price");
     let sum = 0;
 
     for (let i=0; i<prices.length; i++){
-        sum += prices[i].value;
+        sum += parseInt(prices[i].textContent);
     }
-    monthSaleProfit.value = ("월간 판매 수익: " + sum);
+    monthSaleProfit.textContent = ("월간 판매 수익: " + sum + " 원");
 </script>
 </body>
 </html>
