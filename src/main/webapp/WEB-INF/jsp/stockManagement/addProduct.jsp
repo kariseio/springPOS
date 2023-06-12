@@ -97,7 +97,7 @@
             <input type="text" id="re_quantity" name="re_quantity" required>
         </div>
         <div>
-            <button type="submit">입고</button>
+            <button type="submit" onclick="showProductInfo()">입고</button>
         </div>
     </form>
     <div class="back">
@@ -119,6 +119,14 @@
             }
         }
         name.value = '상품을 골라주세요.'
+    }
+    function showProductInfo() {
+        let date = document.getElementById("re_date").value;
+        let name = document.getElementById("p_name").value;
+        let quantity = document.getElementById("re_quantity").value;
+
+        let productInfo = "상품 압고가 완료되었습니다.\n상품 명: " + name + "\n입고일: " + date + "\n수량: " + quantity;
+        alert(productInfo);
     }
 </script>
 </body>

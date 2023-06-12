@@ -118,7 +118,7 @@
 
         <button id="calculateBtn" onclick="calculateTotal()" type="button">가격 계산하기</button>
 
-        <button id="paymentBtn" type="submit">결제하기</button>
+        <button id="paymentBtn" type="submit" onclick="showProductInfo()">결제하기</button>
     </form>
 </div>
 
@@ -167,6 +167,16 @@
 
         let totalAmount = quantity * price;
         totalPriceInput.value = totalAmount;
+    }
+
+    function showProductInfo() {
+        let date = document.getElementById("s_date").value;
+        let name = document.getElementById("s_pname").value;
+        let quantity = document.getElementById("s_quantity").value;
+        let price = document.getElementById("s_price").value;
+
+        let productInfo = "상품 판매가 완료되었습니다.\n상품 명: " + name + "\n수량: " + quantity +"\n판매일: " + date + "\n결제액: " + price;
+        alert(productInfo);
     }
 
 
