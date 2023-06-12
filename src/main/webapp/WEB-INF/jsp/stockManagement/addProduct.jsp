@@ -1,3 +1,4 @@
+<%@ page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -89,7 +90,7 @@
         </div>
         <div>
             <label for="re_date">입고일:</label>
-            <input type="text" id="re_date" name="re_date" required>
+            <input type="text" id="re_date" name="re_date" value="<%= new Timestamp(System.currentTimeMillis()) %>" required>
         </div>
         <div>
             <label for="re_quantity">수량:</label>

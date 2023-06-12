@@ -1,6 +1,4 @@
-<%@ page import="com.example.springpos.entity.Product" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -110,7 +108,7 @@
 
         <div class="column">
             <label for="s_date">판매일 :</label>
-            <input type="text" id="s_date" name="s_date" value="<%LocalDate now = LocalDate.now(); out.print(now);%>" readonly>
+            <input type="text" id="s_date" name="s_date" value="<%= new Timestamp(System.currentTimeMillis()) %>">
         </div>
 
         <div class="column">
