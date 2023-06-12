@@ -78,7 +78,7 @@ public class MainController {
     }
 
     // 로그아웃
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/"; // 로그아웃 후 리다이렉트할 경로
@@ -124,6 +124,9 @@ public class MainController {
 
         if(newPW != null && id != null) {
             memberService.changePW(id, newPW);
+
+            session.invalidate();
+
             return "accountManagement/passwordChangeSuccess";
         } else {
             return "redirect:/passwordChange";
