@@ -86,9 +86,7 @@
         <%-- 로그인 했을 때 --%>
         <%
             Member member = (Member)session.getAttribute("Member");
-            //Member member = null;
             if(member != null) {
-
         %>
         <div class="greeting">
             <span id="memberName"> ${Member.getName()} </span>님 안녕하세요.
@@ -102,12 +100,33 @@
         <a href="login" class="login">로그인</a>
         <% } %>
     </div>
+
+
     <div class="buttons">
         <a href="statistics" class="button">통계</a>
         <a href="stockManagement" class="button">재고 관리</a>
         <a href="sale" class="button">상품 판매</a>
         <a href="account" class="button">계정 관리</a>
     </div>
+
+    <%
+        if(member == null) {
+    %>
+    <script>
+        const buttons = document.querySelectorAll('.button');
+
+        buttons.forEach(button => {
+            button.removeAttribute("href");
+            button.style.backgroundColor = "#808080"; // 회색
+            button.style.pointerEvents = "none";
+            button.style.cursor = "not-allowed";
+        });
+    </script>
+
+    <%
+        }
+    %>
+
 </div>
 <div class="time">
     <script>
