@@ -125,12 +125,4 @@ public class MainController {
             return "redirect:/passwordChange";
         }
     }
-
-    // 계정삭제
-    @GetMapping("/deleteMember")
-    public String delete(Model model) {
-        return "accountManagement/deleteMember";
-    }
-
-
 }
